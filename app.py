@@ -8,5 +8,5 @@ def home():
     return {"message": "Hello from Render (/)!"}
     
     @app.get("/path1")
-def home():
+def home1():
     return {"message": "Hello from Render (/path1)!"}
