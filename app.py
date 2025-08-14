@@ -29,5 +29,6 @@ def db():
     except:
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
-        
-    return {"result": res[0]}
+    stres = cursor.fetchone()
+       
+    return {"result": stres[0]}
