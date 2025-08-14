@@ -30,4 +30,4 @@ def db():
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
         
-return {"result": "db yes"}
+    return {"result": "db yes"}
