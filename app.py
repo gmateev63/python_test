@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import os
 import json
-import sqltile3
+import sqlite3
 
 app = FastAPI()
 
