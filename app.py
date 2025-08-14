@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import os
 import json
+import sqltile3
 
 app = FastAPI()
 
@@ -17,3 +18,16 @@ def list_files():
     files = [f for f in os.listdir('.') if os.path.isfile(f)]
     #return {"files":json.dumps(files)}
     return files
+
+@app.get("/db")    
+def db():
+    conn = sqlite3.connect("signal_translator.db")
+    cursor = conn.cursor()
+
+    try:
+        res = cursor.execute("select pk from history where pk=-1")
+    except:
+        l.logger.error("Error: Bad database. Check the file signal_translator.db")
+        return {"result": "err"}
+        
+return {"result": "db yes"}
