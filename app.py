@@ -15,4 +15,5 @@ def home1():
 @app.get("/files")    
 def list_files():
     files = [f for f in os.listdir('.') if os.path.isfile(f)]
-    return {"files":json.dumps(files)}
+    #return {"files":json.dumps(files)}
+    return files
