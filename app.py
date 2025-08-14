@@ -25,9 +25,9 @@ def db():
     cursor = conn.cursor()
 
     try:
-        res = cursor.execute("select pk from history where pk=-1")
+        res = cursor.execute("select min(pk) from history")
     except:
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
         
-    return {"result": "db yes"}
+    return {"result": res[0]}
