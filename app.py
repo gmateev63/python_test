@@ -23,12 +23,13 @@ def list_files():
 def db():
     conn = sqlite3.connect("signal_translator.db")
     cursor = conn.cursor()
+    sql = "select min(pk) from history"
 
     try:
-        res = cursor.execute("select min(pk) from history")
+        res = cursor.execute(sql)
     except:
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
     stres = cursor.fetchone()
        
-    return {"result": stres[0]}
+    return {"sql": sql,"result": stres[0]}
