@@ -5,10 +5,26 @@ import sqlite3
 import duckdb
 
 app = FastAPI()
+con = duckdb.connect("mydb.duckdb")
+
+con.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY,
+        name VARCHAR,
+        age INTEGER
+    )
+""")
+
+con.execute("""
+    INSERT INTO users VALUES
+        (1, 'Alice', 30),
+        (2, 'Bob', 25),
+        (3, 'Charlie', 35)
+    ON CONFLICT(id) DO NOTHING
+""")
 
 @app.get("/users")
 def get_users(min_age: int = 0):
-    con = duckdb.connect("mydb.duckdb")
     df = con.execute(
         "SELECT * FROM users WHERE age > ?", [min_age]
     ).fetchdf()
@@ -41,28 +57,11 @@ def db():
 
 @app.get("/duckdb")    
 def duck():
-    #result = duckdb.sql("SELECT name,id FROM 'flights.csv'").fetchall()    
-    
-    
-    #duckdb.read_csv("example.csv")                # read a CSV file into a Relation
-    #duckdb.read_parid	name
-    #duckdb.read_json("example.json")              # read a JSON file into a Relation
-    #duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
-    #duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
-    #duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
-    
-    con = duckdb.connect("duck1.duckdb")
-    cursor = con.cursor()
-    sql = "select 40"
+    rows = duckdb.query(f"""
+        SELECT id, name 
+        FROM 'flights.csv'
+        WHERE age > {min_age}
+    """).fetchall()
 
-    try:
-        res = cursor.execute(sql)
-        print(res)
-    except:
-        l.logger.error("Error: Bad database. Check the file signal_translator.db")
-        return {"result": "err"}
-    #stres = cursor.fetchone()
-    
-    
-    return {"result": res}
-    #return {"result": "temp"}
+    result = [{"id": r[0], "name": r[1]} for r in rows]
+    return result
