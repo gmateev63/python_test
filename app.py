@@ -44,7 +44,7 @@ def duckdb():
 
     
     #conn = sqlite3.connect("signal_translator.db")
-    con = duckdb.connect("duck1.db")
+    #con = duckdb.connect("duck1.db")
     '''
     cursor = con.cursor()
     sql = "select message from history where pk=580"
