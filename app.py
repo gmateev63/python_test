@@ -49,11 +49,12 @@ def duck():
 
     try:
         res = cursor.execute(sql)
+        print(res)
     except:
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
     #stres = cursor.fetchone()
     
     
-    return {"result": res[0]}
+    return {"result": res}
     #return {"result": "temp"}
