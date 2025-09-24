@@ -33,7 +33,7 @@ def db():
 
 @app.get("/duckdb")    
 def duckdb():
-    result = duckdb.sql("SELECT name,id FROM 'flights.csv'").fetchall()    
+    #result = duckdb.sql("SELECT name,id FROM 'flights.csv'").fetchall()    
     
     '''
     #duckdb.read_csv("example.csv")                # read a CSV file into a Relation
@@ -42,10 +42,10 @@ def duckdb():
     #duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
     #duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
     #duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
-    #con = duckdb.connect("duck1.duckdb")
     
+    con = duckdb.connect("duck1.duckdb")
     cursor = con.cursor()
-    sql = "select message from history where pk=580"
+    sql = "select 40"
 
     try:
         res = cursor.execute(sql)
@@ -55,5 +55,5 @@ def duckdb():
     stres = cursor.fetchone()
     '''
     
-    return {"result": result[0]}
+    return {"result": res[0]}
     #return {"result": "temp"}
