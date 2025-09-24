@@ -34,8 +34,15 @@ def db():
 @app.get("/duckdb")    
 def duckdb():
 
+
+result = duckdb.query("""
+    SELECT name, id 
+    FROM 'cities.csv' 
+""").fetchall()    
+
     #duckdb.read_csv("example.csv")                # read a CSV file into a Relation
-    #duckdb.read_parquet("example.parquet")        # read a Parquet file into a Relation
+    #duckdb.read_parid	name
+
     #duckdb.read_json("example.json")              # read a JSON file into a Relation
 
     #duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
@@ -56,5 +63,5 @@ def duckdb():
         return {"result": "err"}
     stres = cursor.fetchone()
     '''   
-    #return {"sql": sql,"result": stres[0]}
-    return {"result": "temp"}
+    return {"result": result[0]}
+    #return {"result": "temp"}
