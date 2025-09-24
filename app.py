@@ -35,7 +35,7 @@ def db():
 def duckdb():
     #result = duckdb.sql("SELECT name,id FROM 'flights.csv'").fetchall()    
     
-    '''
+    
     #duckdb.read_csv("example.csv")                # read a CSV file into a Relation
     #duckdb.read_parid	name
     #duckdb.read_json("example.json")              # read a JSON file into a Relation
@@ -52,8 +52,8 @@ def duckdb():
     except:
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
-    stres = cursor.fetchone()
-    '''
+    #stres = cursor.fetchone()
+    
     
     return {"result": res[0]}
     #return {"result": "temp"}
