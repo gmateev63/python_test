@@ -33,10 +33,7 @@ def db():
 
 @app.get("/duckdb")    
 def duckdb():
-    result = duckdb.query("""
-        SELECT name, id 
-        FROM 'flights.csv' 
-    """).fetchall()    
+    result = duckdb.sql("SELECT name,id FROM 'flights.csv'").fetchall()    
     
     '''
     #duckdb.read_csv("example.csv")                # read a CSV file into a Relation
