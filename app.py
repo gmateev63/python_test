@@ -35,7 +35,7 @@ def db():
 def duckdb():
     result = duckdb.query("""
         SELECT name, id 
-        FROM 'cities.csv' 
+        FROM 'flights.csv' 
     """).fetchall()    
     
     '''
