@@ -33,26 +33,20 @@ def db():
 
 @app.get("/duckdb")    
 def duckdb():
-
-
-result = duckdb.query("""
-    SELECT name, id 
-    FROM 'cities.csv' 
-""").fetchall()    
-
+    result = duckdb.query("""
+        SELECT name, id 
+        FROM 'cities.csv' 
+    """).fetchall()    
+    
+    '''
     #duckdb.read_csv("example.csv")                # read a CSV file into a Relation
     #duckdb.read_parid	name
-
     #duckdb.read_json("example.json")              # read a JSON file into a Relation
-
     #duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
     #duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
     #duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
-
-    
-    #conn = sqlite3.connect("signal_translator.db")
     #con = duckdb.connect("duck1.db")
-    '''
+    
     cursor = con.cursor()
     sql = "select message from history where pk=580"
 
@@ -62,6 +56,7 @@ result = duckdb.query("""
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
     stres = cursor.fetchone()
-    '''   
+    '''
+    
     return {"result": result[0]}
     #return {"result": "temp"}
