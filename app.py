@@ -14,12 +14,12 @@ con.execute("""
         age INTEGER
     )
 """)
+
 con.execute("""
     INSERT INTO users VALUES
         (1, 'Alice', 30),
         (2, 'Bob', 25),
         (3, 'Charlie', 35)
-    ON CONFLICT DO NOTHING
 """)
 
 @app.get("/users")
