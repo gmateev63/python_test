@@ -44,8 +44,8 @@ def duckdb():
 
     
     #conn = sqlite3.connect("signal_translator.db")
-    con = duckdb.connect("file.db")
-    
+    con = duckdb.connect("duck1.db")
+    '''
     cursor = con.cursor()
     sql = "select message from history where pk=580"
 
@@ -55,5 +55,6 @@ def duckdb():
         l.logger.error("Error: Bad database. Check the file signal_translator.db")
         return {"result": "err"}
     stres = cursor.fetchone()
-       
-    return {"sql": sql,"result": stres[0]}
+    '''   
+    #return {"sql": sql,"result": stres[0]}
+    return {"result": "temp"}
