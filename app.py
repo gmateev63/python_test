@@ -42,7 +42,7 @@ def duckdb():
     #duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
     #duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
     #duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
-    #con = duckdb.connect("duck1.db")
+    #con = duckdb.connect("duck1.duckdb")
     
     cursor = con.cursor()
     sql = "select message from history where pk=580"
