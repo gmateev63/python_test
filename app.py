@@ -32,7 +32,7 @@ def db():
     return {"sql": sql,"result": stres[0]}
 
 @app.get("/duckdb")    
-def duckdb():
+def duck():
     #result = duckdb.sql("SELECT name,id FROM 'flights.csv'").fetchall()    
     
     
