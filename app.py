@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import os
 import json
 import sqlite3
+import duckdb
 
 app = FastAPI()
 
@@ -30,8 +31,18 @@ def db():
        
     return {"sql": sql,"result": stres[0]}
 
-@app.get("/db2")    
-def db2():
+@app.get("/duckdb")    
+def duckdb():
+
+    #duckdb.read_csv("example.csv")                # read a CSV file into a Relation
+    #duckdb.read_parquet("example.parquet")        # read a Parquet file into a Relation
+    #duckdb.read_json("example.json")              # read a JSON file into a Relation
+
+    duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
+    #duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
+    #duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
+
+    
     conn = sqlite3.connect("signal_translator.db")
     cursor = conn.cursor()
     sql = "select message from history where pk=580"
