@@ -34,7 +34,7 @@ def db():
 def db2():
     conn = sqlite3.connect("signal_translator.db")
     cursor = conn.cursor()
-    sql = "select max(pk) from history"
+    sql = "select message from history where pk=580"
 
     try:
         res = cursor.execute(sql)
