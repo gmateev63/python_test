@@ -5,26 +5,10 @@ import sqlite3
 import duckdb
 
 app = FastAPI()
-con = duckdb.connect("mydb.duckdb")
-
-con.execute("""
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER,
-        name VARCHAR,
-        age INTEGER
-    )
-""")
-
-con.execute("""
-    INSERT INTO users VALUES
-        (1, 'Alice', 30),
-        (2, 'Bob', 25),
-        (3, 'Charlie', 35)
-""")
 
 @app.get("/users")
 def get_users(min_age: int = 0):
-    """Return all users older than min_age"""
+    con = duckdb.connect("mydb.duckdb")
     df = con.execute(
         "SELECT * FROM users WHERE age > ?", [min_age]
     ).fetchdf()
