@@ -60,7 +60,6 @@ def duck():
     rows = duckdb.query(f"""
         SELECT id, name 
         FROM 'flights.csv'
-        WHERE age > {min_age}
     """).fetchall()
 
     result = [{"id": r[0], "name": r[1]} for r in rows]
