@@ -33,3 +33,18 @@ def db():
     stres = cursor.fetchone()
        
     return {"sql": sql,"result": stres[0]}
+
+@app.get("/db2")    
+def db2():
+    conn = sqlite3.connect("signal_translator.db")
+    cursor = conn.cursor()
+    sql = "select max(pk) from history"
+
+    try:
+        res = cursor.execute(sql)
+    except:
+        l.logger.error("Error: Bad database. Check the file signal_translator.db")
+        return {"result": "err"}
+    stres = cursor.fetchone()
+       
+    return {"sql": sql,"result": stres[0]}
