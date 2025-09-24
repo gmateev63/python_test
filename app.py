@@ -38,13 +38,15 @@ def duckdb():
     #duckdb.read_parquet("example.parquet")        # read a Parquet file into a Relation
     #duckdb.read_json("example.json")              # read a JSON file into a Relation
 
-    duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
+    #duckdb.sql("SELECT * FROM 'example.csv'")     # directly query a CSV file
     #duckdb.sql("SELECT * FROM 'example.parquet'") # directly query a Parquet file
     #duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 
     
-    conn = sqlite3.connect("signal_translator.db")
-    cursor = conn.cursor()
+    #conn = sqlite3.connect("signal_translator.db")
+    con = duckdb.connect("file.db")
+    
+    cursor = con.cursor()
     sql = "select message from history where pk=580"
 
     try:
