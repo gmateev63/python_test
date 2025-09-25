@@ -68,10 +68,10 @@ def duck():
 
 @app.get("/redis")    
 def get_redis():
-    #r = redis.from_url(os.environ['redis://red-d2e8qks9c44c73eib3jg:6379'])
-    r = redis.from_url('redis://red-d2e8qks9c44c73eib3jg:6379')
+    r = redis.from_url(os.environ["REDIS_URL"])
+    #r = redis.from_url('redis://red-d2e8qks9c44c73eib3jg:6379')
     
-    r.set('foo', 'bar')
+    #r.set('foo', 'bar') # temp only fot 1-st call
     val = r.get('foo')
     
     return val.decode()
