@@ -3,6 +3,7 @@ import os
 import json
 import sqlite3
 import duckdb
+import redis
 
 app = FastAPI()
 con = duckdb.connect("mydb.duckdb")
@@ -61,6 +62,14 @@ def duck():
         SELECT id, name 
         FROM 'flights.csv'
     """).fetchall()
+
+@app.get("/redis")    
+def get_redis():
+    r = redis.from_url(os.environ['redis://red-d2e8qks9c44c73eib3jg:6379'])
+    
+    r.set('foo', 'bar')
+    val = r.get('foo')
+    print(val.decode())
 
     result = [{"id": r[0], "name": r[1]} for r in rows]
     return result
