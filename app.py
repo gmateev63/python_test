@@ -62,6 +62,9 @@ def duck():
         SELECT id, name 
         FROM 'flights.csv'
     """).fetchall()
+    
+    result = [{"id": r[0], "name": r[1]} for r in rows]
+    return result
 
 @app.get("/redis")    
 def get_redis():
@@ -70,7 +73,7 @@ def get_redis():
     
     r.set('foo', 'bar')
     val = r.get('foo')
-    print(val.decode())
+    
+    return val.decode()
 
-    result = [{"id": r[0], "name": r[1]} for r in rows]
-    return result
+
