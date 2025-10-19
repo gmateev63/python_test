@@ -70,7 +70,7 @@ def duck():
 def get_redis():
     r = redis.from_url('redis://red-d2e8qks9c44c73eib3jg:6379')
     
-    r.set('foo', 'bar') # temp only fot 1-st call
+    #r.set('foo', 'bar') # temp only fot 1-st call
     val = r.get('foo')
     
     return val.decode()
